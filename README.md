@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Trimly
 
-## Getting Started
+Trimly is a lightweight, browser-based video trimming and quality adjustment tool built with **React** and **FFmpeg.wasm**.  
+Easily trim videos, adjust quality, and export clips — all directly in your browser, with no installations required.  
 
-First, run the development server:
+---
 
+## 🔗 Links
+
+- 🔥 **Live Demo:** [Add your demo link here](#)
+- 🎥 **Demo Video:** [Add your video link here](#)
+
+---
+
+## ✨ Features
+
+- 📂 **Upload Videos** from your device
+- ✂️ **Trim Videos** easily with start/end time controls
+- ⚡ **Adjust Quality** with a bitrate slider
+- 🖥️ **In-Browser Processing** with `ffmpeg.wasm`
+- 🔒 **Privacy First:** Videos never leave your machine
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run Trimly locally:
+
+### 1. Prerequisites
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+---
+
+### 2. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/trimly.git
+cd trimly
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Install Dependencies
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### 4. Run the Development Server
+```bash
+npm run dev
+```
+Visit **http://localhost:3000** in your browser to use Trimly locally.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Project Structure
+```
+├── components/
+│   ├── FileUploader.tsx      # Upload videos
+│   └── TrimControls.tsx      # Trim and adjust quality
+├── lib/
+│   └── useFFmpeg.ts          # FFmpeg hook for processing
+├── pages/
+│   └── index.tsx             # Main UI
+└── public/
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🧩 How It Works
+1. Upload a video from your device.  
+2. Set the **start** and **end** time for trimming.  
+3. Adjust the **bitrate** to control video quality.  
+4. Click **Trim Video** to process and download your clip.  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛡️ Privacy
+All processing is done **locally** in your browser using WebAssembly.  
+Your files are **never uploaded** to a server.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork** this repository.
+2. Create a **new branch** for your feature/fix:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Make your changes and **commit**:
+   ```bash
+   git commit -m "Add some feature"
+   ```
+4. **Push** to your branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a **Pull Request** and describe your changes.
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+### 🌟 Star this repo if you find it useful!
