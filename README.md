@@ -7,8 +7,8 @@ Easily trim videos, adjust quality, and export clips — all directly in your br
 
 ## 🔗 Links
 
-- 🔥 **Live Demo:** [[demo link here](https://trimly-nine.vercel.app/)](#)
-- 🎥 **Demo Video:** [[video link here](https://www.youtube.com/watch?v=rekRw8oo5J4)](#)
+- 🔥 **Live Demo:** [[demo link here](https://trimly-nine.vercel.app/)]
+- 🎥 **Demo Video:** [[video link here](https://www.youtube.com/watch?v=rekRw8oo5J4)]
 
 ---
 
