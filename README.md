@@ -7,8 +7,8 @@ Easily trim videos, adjust quality, and export clips — all directly in your br
 
 ## 🔗 Links
 
-- 🔥 **Live Demo:** [Add your demo link here](#)
-- 🎥 **Demo Video:** [Add your video link here](#)
+- 🔥 **Live Demo:** [[demo link here](https://trimly-nine.vercel.app/)](#)
+- 🎥 **Demo Video:** [[video link here](https://www.youtube.com/watch?v=rekRw8oo5J4)](#)
 
 ---
 
@@ -58,14 +58,16 @@ Visit **http://localhost:3000** in your browser to use Trimly locally.
 
 ## 📂 Project Structure
 ```
-├── components/
-│   ├── FileUploader.tsx      # Upload videos
-│   └── TrimControls.tsx      # Trim and adjust quality
-├── lib/
-│   └── useFFmpeg.ts          # FFmpeg hook for processing
-├── pages/
-│   └── index.tsx             # Main UI
-└── public/
+src/
+ ├── app/
+ │   ├── page.tsx          -> Landing page
+ │   ├── editor/
+ │   │   └── page.tsx      -> Video editor UI
+ │   └── globals.css       -> Tailwind styles
+ ├── components/
+ │   ├── FileUploader.tsx
+ │   ├── VideoPlayer.tsx
+ │   ├── TrimControls.tsx
 ```
 
 ---
