@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFFmpeg } from "@/lib/useFFmpeg";
+import { Range, getTrackBackground } from "react-range";
 
 interface TrimControlsProps {
   videoFile: File;
@@ -9,10 +10,22 @@ interface TrimControlsProps {
 
 export default function TrimControls({ videoFile, onTrimmed }: TrimControlsProps) {
   const { ffmpeg, isReady, fetchFile } = useFFmpeg();
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(5);
-  const [bitrate, setBitrate] = useState(1000); // kbps
+  const [duration, setDuration] = useState(30);
+  const [values, setValues] = useState([0, 5]);
+  const [bitrate, setBitrate] = useState(1000);
   const [loading, setLoading] = useState(false);
+
+  const start = values[0];
+  const end = values[1];
+
+  useEffect(() => {
+    const videoEl = document.createElement("video");
+    videoEl.src = URL.createObjectURL(videoFile);
+    videoEl.onloadedmetadata = () => {
+      setDuration(videoEl.duration);
+      setValues([0, Math.min(5, videoEl.duration)]);
+    };
+  }, [videoFile]);
 
   const handleTrim = async () => {
     if (!isReady || !ffmpeg) return alert("FFmpeg is still loading...");
@@ -45,35 +58,55 @@ export default function TrimControls({ videoFile, onTrimmed }: TrimControlsProps
   };
 
   return (
-    <div className="bg-gray-900 border border-gray-700 p-6 rounded-2xl shadow-xl mt-6 w-full max-w-md">
-      <h3 className="text-2xl font-bold mb-6 text-center text-white">🎬 Trim & Adjust</h3>
-      
-      <div className="flex flex-col gap-5 mb-6">
-        {/* Start Time */}
-        <label className="flex flex-col text-white">
-          <span className="mb-1 font-medium">Start Time (seconds)</span>
-          <input
-            type="number"
-            value={start}
-            onChange={(e) => setStart(Number(e.target.value))}
-            className="p-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
+    <div className="bg-gray-900 border border-gray-700 p-6 rounded-2xl shadow-2xl mt-6 w-full max-w-lg mx-auto">
+      {/* Title */}
+      <h3 className="text-2xl font-bold mb-6 text-center text-white">
+        🎬 Trim & Adjust
+      </h3>
 
-        {/* End Time */}
-        <label className="flex flex-col text-white">
-          <span className="mb-1 font-medium">End Time (seconds)</span>
-          <input
-            type="number"
-            value={end}
-            onChange={(e) => setEnd(Number(e.target.value))}
-            className="p-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
+      {/* Start/End Labels */}
+      <div className="flex justify-between mb-3 text-white font-medium text-sm">
+        <span>Start: <span className="text-blue-400">{start.toFixed(2)}s</span></span>
+        <span>End: <span className="text-blue-400">{end.toFixed(2)}s</span></span>
+      </div>
 
-        {/* Quality Slider (renamed) */}
-        <label className="flex flex-col text-white">
-          <span className="mb-1 font-medium">Quality ({bitrate} kbps)</span>
+      {/* Dual-Handle Slider */}
+      <div className="mb-8">
+        <Range
+          values={values}
+          step={0.1}
+          min={0}
+          max={duration}
+          onChange={setValues}
+          renderTrack={({ props, children }) => (
+            <div
+              {...props}
+              className="h-2 w-full rounded-full cursor-pointer"
+              style={{
+                background: getTrackBackground({
+                  values,
+                  colors: ["#3b82f6", "#2563eb", "#3b82f6"],
+                  min: 0,
+                  max: duration,
+                }),
+              }}
+            >
+              {children}
+            </div>
+          )}
+          renderThumb={({ props }) => (
+            <div
+              {...props}
+              className="h-5 w-5 bg-white border-2 border-blue-500 rounded-full shadow-md"
+            />
+          )}
+        />
+      </div>
+
+      {/* Quality Slider */}
+      <div className="mb-8">
+        <label className="flex flex-col gap-2 text-white text-sm font-medium">
+          Quality: <span className="text-blue-400">{bitrate} kbps</span>
           <input
             type="range"
             min="300"
@@ -86,14 +119,15 @@ export default function TrimControls({ videoFile, onTrimmed }: TrimControlsProps
         </label>
       </div>
 
+      {/* Action Button */}
       <button
         onClick={handleTrim}
         disabled={loading}
-        className={`w-full py-3 text-lg font-semibold rounded-xl transition-colors 
+        className={`w-full py-3 text-lg font-semibold rounded-xl transition-all duration-200 
           ${loading 
             ? "bg-gray-600 cursor-not-allowed" 
             : "bg-blue-500 hover:bg-blue-600 active:bg-blue-700"} 
-          text-white`}
+          text-white shadow-md`}
       >
         {loading ? "⏳ Processing..." : "✂️ Trim Video"}
       </button>

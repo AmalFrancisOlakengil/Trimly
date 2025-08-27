@@ -34,12 +34,7 @@ export default function FileUploader({ onFileSelect }: FileUploaderProps) {
       onDragLeave={() => setIsDragging(false)}
       onDrop={handleDrop}
     >
-      <div className="flex flex-col items-center">
-        {/* Simple Upload Icon using Tailwind (No external libs) */}
-        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-700 mb-3">
-          <div className="w-6 h-6 border-2 border-gray-300 border-b-transparent rounded-full animate-spin"></div>
-        </div>
-
+      <div className="flex flex-col items-center allign-center justify-center">
         <h2 className="text-lg font-semibold text-white">Upload a Video</h2>
         <p className="text-sm text-gray-400 mb-4">Drag & drop or click below</p>
 

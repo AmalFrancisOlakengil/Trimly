@@ -3,6 +3,7 @@ import { useState } from "react";
 import FileUploader from "@/components/FileUploader";
 import ScreenRecorder from "@/components/ScreenRecorder";
 import TrimControls from "@/components/TrimControls";
+import InsertVideoControls from "@/components/InsertVideoControls";
 
 export default function EditorPage() {
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -28,6 +29,7 @@ export default function EditorPage() {
 
           <div className="flex gap-4 flex-wrap justify-center">
             <TrimControls videoFile={videoFile} onTrimmed={setVideoFile} />
+            <InsertVideoControls videoFile={videoFile} onMerged={setVideoFile} />
           </div>
 
           <button
